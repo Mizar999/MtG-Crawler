@@ -106,7 +106,7 @@ namespace MtG_Crawler
 
                 SetStatus("Schreibe Daten in Excel");
                 ExcelWriter writer = new ExcelWriter();
-                writer.Write(@"D:\Programmieren\C#\MtG_Crawler\MtG_Crawler\bin\Debug\Test.xlsx", sets);
+                writer.Write(@"Missing Path", sets);
             }
             catch(CompilerException exc)
             {
