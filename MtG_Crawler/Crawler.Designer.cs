@@ -44,6 +44,9 @@
             this.panelStatus = new System.Windows.Forms.Panel();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.labelExcelPath = new System.Windows.Forms.Label();
+            this.buttonExcelPath = new System.Windows.Forms.Button();
+            this.textBoxExcelPath = new System.Windows.Forms.TextBox();
             this.groupBoxScripting.SuspendLayout();
             this.groupBoxLog.SuspendLayout();
             this.panelStatus.SuspendLayout();
@@ -56,7 +59,7 @@
             // buttonExecute
             // 
             this.buttonExecute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonExecute.Location = new System.Drawing.Point(341, 84);
+            this.buttonExecute.Location = new System.Drawing.Point(341, 114);
             this.buttonExecute.Name = "buttonExecute";
             this.buttonExecute.Size = new System.Drawing.Size(75, 23);
             this.buttonExecute.TabIndex = 1;
@@ -77,6 +80,9 @@
             // 
             this.groupBoxScripting.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxScripting.Controls.Add(this.labelExcelPath);
+            this.groupBoxScripting.Controls.Add(this.buttonExcelPath);
+            this.groupBoxScripting.Controls.Add(this.textBoxExcelPath);
             this.groupBoxScripting.Controls.Add(this.checkBoxShowLog);
             this.groupBoxScripting.Controls.Add(this.labelSets);
             this.groupBoxScripting.Controls.Add(this.textBoxSets);
@@ -86,7 +92,7 @@
             this.groupBoxScripting.Controls.Add(this.buttonExecute);
             this.groupBoxScripting.Location = new System.Drawing.Point(3, 3);
             this.groupBoxScripting.Name = "groupBoxScripting";
-            this.groupBoxScripting.Size = new System.Drawing.Size(425, 111);
+            this.groupBoxScripting.Size = new System.Drawing.Size(425, 141);
             this.groupBoxScripting.TabIndex = 3;
             this.groupBoxScripting.TabStop = false;
             this.groupBoxScripting.Text = "Scripting";
@@ -95,7 +101,7 @@
             // 
             this.checkBoxShowLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBoxShowLog.AutoSize = true;
-            this.checkBoxShowLog.Location = new System.Drawing.Point(236, 88);
+            this.checkBoxShowLog.Location = new System.Drawing.Point(236, 118);
             this.checkBoxShowLog.Name = "checkBoxShowLog";
             this.checkBoxShowLog.Size = new System.Drawing.Size(90, 17);
             this.checkBoxShowLog.TabIndex = 7;
@@ -106,7 +112,7 @@
             // labelSets
             // 
             this.labelSets.AutoSize = true;
-            this.labelSets.Location = new System.Drawing.Point(6, 57);
+            this.labelSets.Location = new System.Drawing.Point(6, 83);
             this.labelSets.Name = "labelSets";
             this.labelSets.Size = new System.Drawing.Size(28, 13);
             this.labelSets.TabIndex = 6;
@@ -116,7 +122,7 @@
             // 
             this.textBoxSets.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxSets.Location = new System.Drawing.Point(46, 54);
+            this.textBoxSets.Location = new System.Drawing.Point(46, 80);
             this.textBoxSets.Name = "textBoxSets";
             this.textBoxSets.Size = new System.Drawing.Size(327, 20);
             this.textBoxSets.TabIndex = 5;
@@ -197,7 +203,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelStatusMessage.Location = new System.Drawing.Point(3, 34);
             this.labelStatusMessage.Name = "labelStatusMessage";
-            this.labelStatusMessage.Size = new System.Drawing.Size(419, 201);
+            this.labelStatusMessage.Size = new System.Drawing.Size(419, 171);
             this.labelStatusMessage.TabIndex = 5;
             this.labelStatusMessage.Text = "Statusmessage";
             this.labelStatusMessage.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -209,9 +215,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelStatus.Controls.Add(this.labelStatusMessage);
             this.panelStatus.Controls.Add(this.progressBar);
-            this.panelStatus.Location = new System.Drawing.Point(3, 120);
+            this.panelStatus.Location = new System.Drawing.Point(3, 150);
             this.panelStatus.Name = "panelStatus";
-            this.panelStatus.Size = new System.Drawing.Size(425, 238);
+            this.panelStatus.Size = new System.Drawing.Size(425, 208);
             this.panelStatus.TabIndex = 4;
             // 
             // splitContainer
@@ -238,6 +244,35 @@
             // 
             this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
             this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
+            // 
+            // labelExcelPath
+            // 
+            this.labelExcelPath.AutoSize = true;
+            this.labelExcelPath.Location = new System.Drawing.Point(6, 57);
+            this.labelExcelPath.Name = "labelExcelPath";
+            this.labelExcelPath.Size = new System.Drawing.Size(33, 13);
+            this.labelExcelPath.TabIndex = 10;
+            this.labelExcelPath.Text = "Excel";
+            // 
+            // buttonExcelPath
+            // 
+            this.buttonExcelPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonExcelPath.Location = new System.Drawing.Point(379, 54);
+            this.buttonExcelPath.Name = "buttonExcelPath";
+            this.buttonExcelPath.Size = new System.Drawing.Size(37, 23);
+            this.buttonExcelPath.TabIndex = 9;
+            this.buttonExcelPath.Text = "...";
+            this.buttonExcelPath.UseVisualStyleBackColor = true;
+            this.buttonExcelPath.Click += new System.EventHandler(this.buttonExcelPath_Click);
+            // 
+            // textBoxExcelPath
+            // 
+            this.textBoxExcelPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxExcelPath.Location = new System.Drawing.Point(46, 54);
+            this.textBoxExcelPath.Name = "textBoxExcelPath";
+            this.textBoxExcelPath.Size = new System.Drawing.Size(327, 20);
+            this.textBoxExcelPath.TabIndex = 8;
             // 
             // Crawler
             // 
@@ -281,6 +316,9 @@
         private System.Windows.Forms.Panel panelStatus;
         private System.Windows.Forms.SplitContainer splitContainer;
         private System.ComponentModel.BackgroundWorker backgroundWorker;
+        private System.Windows.Forms.Label labelExcelPath;
+        private System.Windows.Forms.Button buttonExcelPath;
+        private System.Windows.Forms.TextBox textBoxExcelPath;
     }
 }
 

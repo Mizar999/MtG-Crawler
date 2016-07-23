@@ -56,7 +56,7 @@ namespace MtG_Crawler
 
         private void buttonExecute_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBoxScriptPath.Text))
+            if (!string.IsNullOrEmpty(textBoxScriptPath.Text) && !string.IsNullOrEmpty(textBoxExcelPath.Text))
             {
                 labelStatusMessage.Text = string.Empty;
                 SetControlsForProcessing(true);
@@ -66,18 +66,30 @@ namespace MtG_Crawler
 
         private void buttonScriptFile_Click(object sender, EventArgs e)
         {
+            SetPathFromDialogToTextBox(textBoxScriptPath);
+        }
+
+        private void buttonExcelPath_Click(object sender, EventArgs e)
+        {
+            SetPathFromDialogToTextBox(textBoxExcelPath);
+        }
+
+        private void SetPathFromDialogToTextBox(TextBox textBox)
+        {
             OpenFileDialog dialog = new OpenFileDialog();
             if (dialog.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(dialog.FileName))
-                textBoxScriptPath.Text = dialog.FileName;
+                textBox.Text = dialog.FileName;
         }
 
         private void SetControlsForProcessing(bool isProcessing)
         {
             buttonExecute.Enabled = !isProcessing;
             buttonScriptFile.Enabled = !isProcessing;
+            buttonExcelPath.Enabled = !isProcessing;
 
             textBoxScriptPath.Enabled = !isProcessing;
             textBoxSets.Enabled = !isProcessing;
+            textBoxExcelPath.Enabled = !isProcessing;
 
             panelStatus.Visible = isProcessing;
         }
@@ -106,7 +118,7 @@ namespace MtG_Crawler
 
                 SetStatus("Schreibe Daten in Excel");
                 ExcelWriter writer = new ExcelWriter();
-                writer.Write(@"Missing Path", sets);
+                writer.Write(textBoxExcelPath.Text, sets);
             }
             catch(CompilerException exc)
             {

@@ -64,6 +64,7 @@
     <Compile Include="Data\ICrawlResult.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Scripts\miracle_games.cs" />
     <Compile Include="Utility\ICrawlerMessages.cs" />
     <Compile Include="Utility\MessageController.cs" />
     <EmbeddedResource Include="Crawler.resx">
@@ -93,7 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="lib\" />
-    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
