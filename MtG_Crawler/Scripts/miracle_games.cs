@@ -34,7 +34,7 @@ public class Script
 
     public IEnumerable<CardSet> GetData(string setParameter)
     {
-        string[] sets = setParameter.Split(',').Select(element => element.ToLower()).Distinct().ToArray();
+        string[] sets = setParameter.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(element => element.ToLower()).Distinct().ToArray();
         foreach (string setStr in sets)
         {
             _currentSet = setStr;
