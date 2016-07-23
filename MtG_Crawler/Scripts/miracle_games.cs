@@ -7,6 +7,7 @@ using HtmlAgilityPack;
 using MtG_Crawler.Data;
 using MtG_Crawler.Utility;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 // Hinweis: In den VS-Eigenschaften dieser Datei muss "Buildvorgang" auf "Keine" gesetzt sein
 
@@ -33,7 +34,7 @@ public class Script
 
     public IEnumerable<CardSet> GetData(string setParameter)
     {
-        string[] sets = setParameter.Split(',');
+        string[] sets = setParameter.Split(',').Select(element => element.ToLower()).Distinct().ToArray();
         foreach (string setStr in sets)
         {
             _currentSet = setStr;
@@ -57,7 +58,7 @@ public class Script
                 Thread.Sleep(500);
             }
 
-            cards.OrderBy("Mythic Rare", "Rare", "Uncommon", "Common");
+            cards.OrderBy(CardSet.MythicRarity, CardSet.RareRarity, CardSet.UncommonRarity, CardSet.CommonRarity);
             yield return cards;
 
             MessageController.Log(string.Format("Set: '{0}' {1}", setStr, cards.GetSetOverview()));

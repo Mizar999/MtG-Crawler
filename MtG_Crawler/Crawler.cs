@@ -63,19 +63,9 @@ namespace MtG_Crawler
                 if (!Directory.Exists(directoryPath))
                     Directory.CreateDirectory(directoryPath);
 
-                bool executeScript = true;
-                if (File.Exists(textBoxExcelPath.Text))
-                {
-                    DialogResult result = MessageBox.Show(string.Format("Die Datei '{0}' existiert bereits und wird überschrieben. Fortfahren?", textBoxExcelPath.Text), "Excel-Datei bereits vorhanden", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-                    executeScript = result == DialogResult.Yes;
-                }
-
-                if (executeScript)
-                {
-                    labelStatusMessage.Text = string.Empty;
-                    SetControlsForProcessing(true);
-                    backgroundWorker.RunWorkerAsync();
-                }
+                labelStatusMessage.Text = string.Empty;
+                SetControlsForProcessing(true);
+                backgroundWorker.RunWorkerAsync();
             }
         }
 
@@ -130,7 +120,7 @@ namespace MtG_Crawler
                 SetStatus("Verarbeite Daten ...");
                 CardSet[] sets = result.GetData(textBoxSets.Text).ToArray();
 
-                SetStatus("Schreibe Daten in Excel");
+                SetStatus(string.Format("Schreibe Daten in die Datei '{0}'", textBoxExcelPath.Text));
                 ExcelWriter writer = new ExcelWriter();
                 writer.Write(textBoxExcelPath.Text, sets);
             }
