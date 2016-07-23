@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Excel = Microsoft.Office.Interop.Excel;
@@ -49,8 +50,9 @@ namespace MtG_Crawler.Converter
             }
 
             workbook.Save();
-            workbook.Close();
+            workbook.Close(true);
             app.Quit();
+            Marshal.ReleaseComObject(app);
         }
 
         private Excel.Workbook GetWorkbookAndDeleteIfExists(string filepath, Excel.Application app)
@@ -62,7 +64,8 @@ namespace MtG_Crawler.Converter
             if (File.Exists(filepath))
                 File.Delete(filepath);
 
-            Excel.Workbook workbook = app.Workbooks.Add(Excel.XlWBATemplate.xlWBATWorksheet);
+            Excel.Workbooks workbooks = app.Workbooks;
+            Excel.Workbook workbook = workbooks.Add(Excel.XlWBATemplate.xlWBATWorksheet);
             workbook.SaveAs(filepath);
             return workbook;
         }
