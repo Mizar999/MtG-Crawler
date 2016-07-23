@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -58,27 +59,40 @@ namespace MtG_Crawler
         {
             if (!string.IsNullOrEmpty(textBoxScriptPath.Text) && !string.IsNullOrEmpty(textBoxExcelPath.Text))
             {
-                labelStatusMessage.Text = string.Empty;
-                SetControlsForProcessing(true);
-                backgroundWorker.RunWorkerAsync();
+                string directoryPath = Path.GetDirectoryName(textBoxExcelPath.Text);
+                if (!Directory.Exists(directoryPath))
+                    Directory.CreateDirectory(directoryPath);
+
+                bool executeScript = true;
+                if (File.Exists(textBoxExcelPath.Text))
+                {
+                    DialogResult result = MessageBox.Show(string.Format("Die Datei '{0}' existiert bereits und wird überschrieben. Fortfahren?", textBoxExcelPath.Text), "Excel-Datei bereits vorhanden", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                    executeScript = result == DialogResult.Yes;
+                }
+
+                if (executeScript)
+                {
+                    labelStatusMessage.Text = string.Empty;
+                    SetControlsForProcessing(true);
+                    backgroundWorker.RunWorkerAsync();
+                }
             }
         }
 
         private void buttonScriptFile_Click(object sender, EventArgs e)
         {
-            SetPathFromDialogToTextBox(textBoxScriptPath);
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "CS-Dateien (*.cs)|*.cs|Alle Dateien (*.*)|*.*";
+            if (dialog.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(dialog.FileName))
+                textBoxScriptPath.Text = dialog.FileName;
         }
 
         private void buttonExcelPath_Click(object sender, EventArgs e)
         {
-            SetPathFromDialogToTextBox(textBoxExcelPath);
-        }
-
-        private void SetPathFromDialogToTextBox(TextBox textBox)
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "Excel-Dateien (*.xls,*.xlsx)|*.xlsx;*xls|Alle Dateien (*.*)|*.*";
             if (dialog.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(dialog.FileName))
-                textBox.Text = dialog.FileName;
+                textBoxExcelPath.Text = dialog.FileName;
         }
 
         private void SetControlsForProcessing(bool isProcessing)

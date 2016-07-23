@@ -79,7 +79,7 @@ namespace MtG_Crawler.Converter
 
         private void WriteCardSet(Excel.Worksheet sheet, CardSet set)
         {
-            sheet.Cells[1, 1] = string.Format("Set: {0}", set.Name);
+            sheet.Cells[1, 1] = string.Format("Set: {0}", set.Name.ToUpper());
             sheet.Range[sheet.Cells[1, FIRST_COLUMN_INDEX], sheet.Cells[1, LAST_COLUMN_INDEX]].Merge();
             sheet.Rows[1].HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
 
@@ -95,12 +95,6 @@ namespace MtG_Crawler.Converter
                 sheet.Rows[currentRow].HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                 ++currentRow;
 
-                sheet.Cells[currentRow, COLUMN_INDEX_NAME] = "Name";
-                sheet.Cells[currentRow, COLUMN_INDEX_TRANSLATION] = "DEU Name";
-                sheet.Cells[currentRow, COLUMN_INDEX_COLLECTORSNUMBER] = "Nr.";
-                sheet.Cells[currentRow, COLUMN_INDEX_PRICE] = "Preis";
-                ++currentRow;
-
                 foreach (Card card in set.GetCards().Where(card => string.Equals(card.Rarity, rarity)))
                 {
                     sheet.Cells[currentRow, COLUMN_INDEX_NAME] = card.Name;
@@ -114,7 +108,6 @@ namespace MtG_Crawler.Converter
                     ++currentRow;
                 }
 
-                //currentRow += 2;
                 ++currentRow;
             }
 
